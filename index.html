@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Hendry Gunawan · CV Interaktif</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0B1120 0%, #19223C 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 2rem 1rem;
+            color: #E2E8F0;
+        }
+
+        /* container utama */
+        .cv-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 48px;
+            padding: 2rem;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+
+        /* header profil */
+        .profile-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px dashed rgba(255,255,255,0.15);
+            padding-bottom: 2rem;
+        }
+        .avatar {
+            background: linear-gradient(135deg, #38BDF8, #A855F7);
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 15px 30px rgba(56,189,248,0.3);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        .title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #FFFFFF, #94A3F8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .contact-info i {
+            width: 28px;
+            color: #38BDF8;
+        }
+
+        /* grid section */
+        .section {
+            margin: 2.2rem 0;
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 5px solid #38BDF8;
+            padding-left: 1rem;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.2rem;
+        }
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.2rem 1.4rem;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+            cursor: default;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(51, 65, 85, 0.8);
+            border-color: #38BDF8;
+            box-shadow: 0 12px 25px -10px #38BDF880;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #FACC15;
+            margin-bottom: 8px;
+        }
+        .card-sub {
+            font-size: 0.8rem;
+            color: #94A3B8;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .list-item {
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+        .list-item i {
+            color: #38BDF8;
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+        .chip {
+            background: #1E293B;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        /* progress bar style untuk skill? tidak ada data skill, tapi untuk vibe */
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.75rem;
+            color: #64748B;
+        }
+        a {
+            color: #38BDF8;
+            text-decoration: none;
+        }
+        @media (max-width: 680px) {
+            .cv-container {
+                padding: 1.2rem;
+            }
+            .title h1 {
+                font-size: 1.6rem;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .badge-group {
+                justify-content: center;
+            }
+            .contact-info {
+                justify-content: center;
+            }
+        }
+        .glow-text {
+            background: linear-gradient(120deg, #CBD5E1, #FACC15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        hr {
+            border-color: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="cv-container">
+    <!-- Header Profil -->
+    <div class="profile-header">
+        <div class="avatar">
+            <span>HG</span>
+        </div>
+        <div style="flex:1">
+            <div class="title">
+                <h1>Hendry Gunawan, S.HI., MH., M.Kom.</h1>
+                <div class="badge-group">
+                    <span class="badge"><i class="fas fa-chalkboard-user"></i> Dosen Multimedia</span>
+                    <span class="badge"><i class="fas fa-building"></i> Universitas Serang Raya</span>
+                    <span class="badge"><i class="fas fa-brain"></i> Direktur sigmaBRAIN.ID</span>
+                </div>
+            </div>
+            <div class="contact-info">
+                <span><i class="fas fa-venus-mars"></i> Laki-laki · Menikah</span>
+                <span><i class="fas fa-globe"></i> Islam</span>
+                <span><i class="fas fa-id-card"></i> NIDN: 0412038603</span>
+                <span><i class="fas fa-map-pin"></i> Kota Serang, Banten</span>
+                <span><i class="fas fa-phone-alt"></i> 081927977810</span>
+                <span><i class="fas fa-envelope"></i> hendrygunawan@unsera.ac.id</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pendidikan -->
+    <div class="section">
+        <div class="section-title">
+            <i class="fas fa-graduation-cap fa-fw"></i> 
+            <span>Pendidikan · Resonance Track</span>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-title">S2 Hukum Keluarga Islam</div>
+                <div class="card-sub">UIN "SMH" Banten · 2021-2023</div>
+            </div>
+            <div class="card">
+                <div class="card-title">S2 Computer Science</div>
+                <div class="card-sub">STMIK Nusa Mandiri Jakarta · 2012-2015</div>
+            </div>
+            <div class="card">
+                <div class="card-title">S1 Hukum Keluarga Islam</div>
+                <div class="card-sub">IAIN "SMH" Banten · 2005-2009</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Pesantren Modern MA Darussalam</div>
+                <div class="card-sub">Lampung · 2001-2005</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pengalaman Bekerja (highlight) -->
+    <div class="section">
+        <div class="section-title">
+            <i class="fas fa-briefcase"></i> 
+            <span>Track Record · Profesional</span>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <i class="fas fa-laptop-code" style="color:#FACC15"></i>
+                <div class="card-title">Dosen Multimedia (2012–sekarang)</div>
+                <div class="card-sub">Universitas Serang Raya (Unsera) · Banten</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-chart-line"></i>
+                <div class="card-title">Direktur Eksekutif sigmaBRAIN.ID</div>
+                <div class="card-sub">2015–sekarang · Technopreneur & IT Solution</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-microchip"></i>
+                <div class="card-title">IT Consultant Strategis</div>
+                <div class="card-sub">Radar Banten, Diskominfo Serang, KPU Serang & Cilegon (2010-2021)</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-network-wired"></i>
+                <div class="card-title">Kepala Pusdainfo – Universitas Banten</div>
+                <div class="card-sub">2018–2023 · Pusat Data & Informasi</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pengalaman Organisasi & Juri -->
+    <div class="section">
+        <div class="section-title">
+            <i class="fas fa-users"></i> 
+            <span>Leadership & Kepanitiaan</span>
+        </div>
+        <div class="flex-between" style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+            <div style="flex:1; min-width: 200px;">
+                <ul style="list-style: none;">
+                    <li class="list-item"><i class="fas fa-check-circle"></i> Sekretaris IDRI Prov. Banten (2022–2027)</li>
+                    <li class="list-item"><i class="fas fa-check-circle"></i> Ketua Komnas Perlindungan Anak Banten (2021–2026)</li>
+                    <li class="list-item"><i class="fas fa-check-circle"></i> Sekretaris II FK KIM Banten (2020–2025)</li>
+                    <li class="list-item"><i class="fas fa-check-circle"></i> Wakil Ketua LPA Banten (2016–2020)</li>
+                    <li class="list-item"><i class="fas fa-check-circle"></i> Pimpinan Umum Lembaga Pers Mahasiswa SiGMA IAIN Banten</li>
+                </ul>
+            </div>
+            <div style="flex:1">
+                <div class="card-title"><i class="fas fa-gavel"></i> Dewan Juri & Fasilitator</div>
+                <ul style="list-style: none; margin-top: 8px;">
+                    <li class="list-item"><i class="fas fa-star"></i> Juri Desain Logo HUT Prov. Banten 2025</li>
+                    <li class="list-item"><i class="fas fa-star"></i> Juri Web Technologies LKS Banten (2018–2025)</li>
+                    <li class="list-item"><i class="fas fa-star"></i> Fasilitator Anak Berkebutuhan Khusus (ABK) – DP3AKKB Banten</li>
+                    <li class="list-item"><i class="fas fa-star"></i> Juri Duta Anak Banten 2018</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Portfolio (Web & Apps) -->
+    <div class="section">
+        <div class="section-title">
+            <i class="fas fa-rocket"></i>
+            <span>Digital Project · Real Work</span>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-title">🌐 Web Publik</div>
+                <div class="list-item"><i class="fas fa-link"></i> pajak-bantenprov.web.id</div>
+                <div class="list-item"><i class="fas fa-link"></i> kpu-serangkota.go.id</div>
+                <div class="list-item"><i class="fas fa-link"></i> idribanten.or.id</div>
+                <div class="chip">2013–2023: puluhan web dinas & pendidikan</div>
+            </div>
+            <div class="card">
+                <div class="card-title">📱 Mobile Apps (Android)</div>
+                <div class="list-item"><i class="fab fa-android"></i> Kamus Bahasa Jawa Banten</div>
+                <div class="list-item"><i class="fab fa-android"></i> Kamus Budaya Baduy</div>
+                <div class="list-item"><i class="fab fa-android"></i> PBBKB & Pajak Air – Bapenda Banten</div>
+            </div>
+            <div class="card">
+                <div class="card-title">⚙️ Sistem Kunci</div>
+                <div class="list-item">Tabulasi Pemilukada Kota Cilegon 2010</div>
+                <div class="list-item">Website KPU Cilegon & Website Kementrian Perhubungan</div>
+                <div class="list-item">E-learning & Portal Berita (literanews.com, bantenline.co dll)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Training & Sertifikasi -->
+    <div class="section">
+        <div class="section-title">
+            <i class="fas fa-certificate"></i>
+            <span>Training & Pengembangan</span>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <i class="fas fa-chalkboard"></i>
+                <div class="card-title">PEKERTI – UPI Bandung (2019)</div>
+                <div class="card-sub">Peningkatan Keterampilan Dasar Teknik Instruksional</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-child"></i>
+                <div class="card-title">Fasilitator Nasional ABK (KemenPPA 2018)</div>
+                <div class="card-sub">Anak Berkebutuhan Khusus</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-database"></i>
+                <div class="card-title">Training Multimedia Lecture – ITB (2014)</div>
+                <div class="card-sub">Diselenggarakan oleh Unsera</div>
+            </div>
+            <div class="card">
+                <i class="fas fa-code"></i>
+                <div class="card-title">Seminar Java & Android Programming (2011)</div>
+                <div class="card-sub">IlmuTI.com + Perguruan Tinggi Raharja</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Micro-interactive element: Counter unik? Biar ada "resonance loop" minimal  -->
+    <div style="text-align: center; margin-top: 1rem; background: #0F172A40; border-radius: 40px; padding: 0.8rem;">
+        <p><i class="fas fa-chart-simple"></i> <strong id="counterInfo">🔁 20+ tahun pengalaman interdisipliner</strong> — Hukum, Komputer, Digital Parenting, IT Consultant.</p>
+        <small class="glow-text">✨ hover ke card mana pun untuk efek resonance ✨</small>
+    </div>
+    <footer>
+        <i class="fas fa-mobile-alt"></i> CV Interaktif · Hendry Gunawan, S.HI., MH., M.Kom. | NIDN 0412038603 | Universitas Serang Raya<br>
+        Data diambil dari pengalaman riil · Dirancang dengan pendekatan Gen Z aesthetic & microsite dinamis
+    </footer>
+</div>
+
+<script>
+    // sedikit interaksi: memberi efek dinamis pada title card ketika dihover? Sudah ada di CSS.
+    // bonus: update angka tahun experience
+    const expElement = document.getElementById("counterInfo");
+    if(expElement) {
+        // tidak ada perubahan besar, hanya agar ada elemen 'resonance loop' sederhana
+        let clickCount = 0;
+        expElement.addEventListener("click", () => {
+            clickCount++;
+            const messages = [
+                "📚 Dosen sejak 2009 + praktisi IT lebih dari 15 tahun.",
+                "🧠 17+ tahun mengajar & mengembangkan sistem digital.",
+                "⚖️ Keahlian dual track: hukum keluarga & komputer science.",
+                "🏆 Sudah menjadi juri LKS Web Technologies 8 tahun berturut-turut."
+            ];
+            expElement.innerHTML = `🌀 <strong>${messages[clickCount % messages.length]}</strong>`;
+            setTimeout(() => {
+                expElement.innerHTML = `🔁 20+ tahun pengalaman interdisipliner — Hukum, Komputer, Digital Parenting, IT Consultant.`;
+            }, 2500);
+        });
+        expElement.style.cursor = "pointer";
+    }
+</script>
+</body>
+</html>
