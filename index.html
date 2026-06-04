@@ -1,35 +1,54 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Interactive Microsite & CV - Hendry Gunawan, S.HI., MH., M.Kom.">
-    <title>Hendry Gunawan · Interactive CV</title>
+    <title>Hendry Gunawan · Portofolio & CV Interaktif</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- DESIGN SYSTEM & VARIABLES --- */
-        :root {
-            --bg-main: #030712;
-            --bg-gradient: linear-gradient(135deg, #030712 0%, #0b1528 100%);
-            --panel-bg: rgba(15, 23, 42, 0.45);
-            --panel-border: rgba(255, 255, 255, 0.08);
-            --panel-hover-border: rgba(56, 189, 248, 0.4);
-            
-            /* Gen Z Cyber Colors */
-            --accent-cyan: #38BDF8;
-            --accent-purple: #8B5CF6;
-            --accent-yellow: #FACC15;
-            --text-primary: #F9FAFB;
-            --text-secondary: #9CA3AF;
-            
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        /* ==========================================================================
+           CORE VARIABLE SYSTEM (Suporting Light & Dark Mode via Data-Theme)
+           ========================================================================== */
+        :root[data-theme="light"] {
+            --bg-global: #f4f7fc;
+            --bg-surface: #ffffff;
+            --bg-bento: #f9fafe;
+            --text-main: #1a2c3e;
+            --text-muted: #64748b;
+            --primary: #1e3a5f;
+            --primary-light: #2c5282;
+            --accent: #e67e22;
+            --accent-hover: #d35400;
+            --border-color: #edf2f7;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 10px 30px -10px rgba(30,58,95,0.1);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(226, 232, 240, 0.8);
         }
 
-        /* --- CSS RESET & BASE STYLES --- */
+        :root[data-theme="dark"] {
+            --bg-global: #0b1329;
+            --bg-surface: #1c2541;
+            --bg-bento: #111a30;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #3a86ff;
+            --primary-light: #60a5fa;
+            --accent: #ff006e;
+            --accent-hover: #ff3385;
+            --border-color: #1e293b;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+            --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.5);
+            --glass-bg: rgba(28, 37, 65, 0.85);
+            --glass-border: rgba(30, 41, 59, 0.8);
+        }
+
+        /* ==========================================================================
+           RESET & BASE STYLES
+           ========================================================================== */
         * {
             margin: 0;
             padding: 0;
@@ -38,524 +57,656 @@
         }
 
         body {
-            background: var(--bg-main);
-            background-image: var(--bg-gradient);
-            font-family: var(--font-sans);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
+            background-color: var(--bg-global);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Ambient Decorative Glows Behind Bento Grid */
-        body::before, body::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: var(--accent-purple);
-            filter: blur(120px);
-            opacity: 0.15;
-            z-index: 0;
-            pointer-events: none;
-        }
-        body::before { top: 10%; left: 10%; background: var(--accent-cyan); }
-        body::after { bottom: 10%; right: 10%; }
-
-        /* --- MAIN INTERACTIVE CONTAINER --- */
-        .cv-wrapper {
-            width: 100%;
-            max-width: 1100px;
-            background: var(--panel-bg);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid var(--panel-border);
-            border-radius: 32px;
-            padding: 3rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            z-index: 1;
+        .cv-container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        /* --- HERO PROFILE HEADER (BENTO STYLE) --- */
-        .hero-section {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 2.5rem;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .avatar-container {
-            position: relative;
-        }
-
-        .avatar-glow {
-            width: 130px;
-            height: 130px;
-            border-radius: 28px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transform: rotate(-3deg);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .hero-section:hover .avatar-glow {
-            transform: rotate(0deg) scale(1.05);
-        }
-
-        .profile-info h1 {
-            font-family: var(--font-display);
-            font-size: 2.4rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(90deg, #FFFFFF, #93C5FD);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.75rem;
-        }
-
-        /* Badges Styling */
-        .tag-group {
+        /* ==========================================================================
+           HEADER / HERO SECTION (Modern Clean Banner)
+           ========================================================================== */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            color: #ffffff;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .tag-pill {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-flex;
+            gap: 2.5rem;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .tag-pill i { color: var(--accent-cyan); }
-        .tag-pill:hover {
-            background: rgba(56, 189, 248, 0.1);
-            border-color: rgba(56, 189, 248, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Actionable Contact Row */
-        .meta-contact {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-
-        .clickable-meta {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            transition: all 0.2s ease;
-        }
-
-        .clickable-meta i {
-            color: var(--accent-purple);
-            width: 16px;
-            text-align: center;
-        }
-
-        .clickable-meta:hover {
-            background: rgba(255, 255, 255, 0.07);
-            color: var(--text-primary);
-        }
-
-        /* --- BENTO GRID ARCHITECTURE --- */
-        .grid-header {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-primary);
-        }
-
-        .grid-header i {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.25rem;
-            margin-bottom: 3.5rem;
-        }
-
-        /* Base Bento Item Card */
-        .bento-card {
-            grid-column: span 4; /* Default 3 column look */
-            background: rgba(30, 41, 59, 0.3);
-            border: 1px solid var(--panel-border);
-            border-radius: 24px;
-            padding: 1.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .avatar-box {
+            width: 150px;
+            height: 190px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 6px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             overflow: hidden;
         }
 
-        .bento-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--panel-hover-border);
-            background: rgba(30, 41, 59, 0.5);
-            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.08);
+        .img-placeholder {
+            width: 100%;
+            height: 145px;
+            background: #e2e8f0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 3.5rem;
+            transition: all 0.3s ease;
         }
 
-        /* Dynamic Grid Layout Overrides */
-        .span-8 { grid-column: span 8; }
-        .span-6 { grid-column: span 6; }
-        .span-12 { grid-column: span 12; }
-
-        .card-heading {
-            font-size: 1.15rem;
+        .avatar-box span {
+            font-size: 0.68rem;
             font-weight: 700;
-            color: #FFFFFF;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .hero-details {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hero-details h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.2;
             margin-bottom: 0.5rem;
         }
 
-        .card-subtext {
+        .badge-carousel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge-tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .meta-contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .meta-item {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .meta-item i {
+            color: var(--accent);
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* UTILITY UTK UTK TOGGLE LIGHT/DARK */
+        .theme-switcher {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 5;
+        }
+        .theme-switcher:hover { background: rgba(255,255,255,0.3); }
+
+        /* ==========================================================================
+           STICKY INTERACTIVE NAVIGATION
+           ========================================================================== */
+        .sticky-navbar {
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .timeline-year {
-            background: rgba(139, 92, 246, 0.2);
-            color: #DDD6FE;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+        .nav-scroll-container {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 4px;
+            scrollbar-width: none; /* Firefox */
+        }
+        .nav-scroll-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        .nav-btn {
+            text-decoration: none;
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.88rem;
             font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover {
+            background: var(--primary);
+            color: #ffffff !important;
         }
 
-        /* Custom Flex List Items for Projects & Leadership */
-        .clean-list {
-            list-style: none;
+        .search-wrapper {
+            position: relative;
+            min-width: 200px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-global);
+            color: var(--text-main);
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(230,126,34,0.15); }
+        .search-wrapper i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem;}
+
+Safe-BentoGrid { display: none; } /* Hidden semantic placeholder */
+
+        /* ==========================================================================
+           MAIN BENTO GRID ENGINE
+           ========================================================================== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.7fr;
+            gap: 2rem;
         }
 
-        .list-row {
+        .bento-sidebar, .bento-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* CARD CORE STYLING */
+        .bento-card {
+            background-color: var(--bg-surface);
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.9rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.6rem;
         }
+        .card-header-title i { color: var(--accent); }
 
-        .list-row:last-child { border: none; }
-        .list-row i { color: var(--accent-yellow); font-size: 0.85rem; }
+        /* PROFILE DETAILS ELEMENTS */
+        .profile-bio { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        
+        .list-profile-data { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+        .list-profile-data li { display: flex; gap: 12px; font-size: 0.88rem; align-items: flex-start; }
+        .list-profile-data li i { color: var(--accent); width: 20px; margin-top: 3px; text-align: center; }
 
-        .project-link {
+        /* TIMELINE ENGINE */
+        .timeline-stream {
+            position: relative;
+            border-left: 2px solid var(--border-color);
+            padding-left: 1.5rem;
+            margin-left: 0.5rem;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 14px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .project-link:hover {
-            background: rgba(56, 189, 248, 0.08);
-            transform: translateX(4px);
+        .timeline-node {
+            position: relative;
         }
-
-        .project-link i { color: var(--accent-cyan); }
-
-        .chip-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 12px;
-        }
-
-        .micro-chip {
-            background: rgba(24A, 204, 21, 0.1);
-            border: 1px solid rgba(24A, 204, 21, 0.2);
-            color: var(--accent-yellow);
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        /* --- MICRO-INTERACTIVE PULSE COMPONENT --- */
-        .interactive-pill-box {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            cursor: pointer;
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: calc(-1.5rem - 6px);
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background: var(--bg-surface);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            z-index: 2;
             transition: all 0.3s;
         }
-
-        .interactive-pill-box:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--accent-cyan);
+        .timeline-node:hover::before {
+            background: var(--accent);
+            transform: scale(1.2);
         }
 
-        .pulse-text {
-            font-weight: 600;
-            color: var(--text-primary);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .node-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.2rem; }
+        .node-title { font-weight: 700; color: var(--text-main); font-size: 0.95rem; }
+        .node-time { font-size: 0.75rem; background: var(--bg-global); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 30px; font-weight: 600; }
+        .node-desc { font-size: 0.85rem; color: var(--text-muted); }
 
-        .glow-hint {
-            display: block;
-            margin-top: 6px;
-            font-size: 0.75rem;
-            color: var(--accent-cyan);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        /* PORTFOLIO GRID HOVER STYLES */
+        .portfolio-box { display: flex; flex-direction: column; gap: 1.2rem; }
+        .portfolio-group { background: var(--bg-bento); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .portfolio-group h4 { font-size: 0.9rem; font-weight: 700; color: var(--primary-light); margin-bottom: 0.5rem; }
+        .portfolio-links { font-size: 0.85rem; color: var(--text-muted); }
+        .portfolio-links a { color: var(--primary-light); text-decoration: none; font-weight: 600; margin-right: 8px; display: inline-block;}
+        .portfolio-links a:hover { color: var(--accent); text-decoration: underline; }
 
-        /* --- FLOATING TOAST SYSTEM --- */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #10B981;
-            color: #fff;
-            text-align: center;
-            border-radius: 12px;
-            padding: 14px;
-            position: fixed;
-            z-index: 10;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-        }
+        /* BULLET LIST MODERNIZATION */
+        .modern-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .modern-bullets li { position: relative; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-main); }
+        .modern-bullets li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-
-        @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
-        @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
-
-        /* --- FOOTER REGION --- */
+        /* ==========================================================================
+           FOOTER STYLING
+           ========================================================================== */
         footer {
+            margin-top: 3rem;
             text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            background: var(--bg-surface);
+            border-radius: 16px;
             font-size: 0.8rem;
-            color: #4B5563;
-            line-height: 1.6;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
         }
 
-        /* --- RESPONSIVE BREAKPOINTS (MOBILE FIRST ADAPTATION) --- */
-        @media (max-width: 900px) {
-            .bento-card { grid-column: span 6; }
-            .span-8 { grid-column: span 12; }
+        /* ==========================================================================
+           RESPONSIVE BREAKPOINTS (Mobile-First Optimization)
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
-        @media (max-width: 650px) {
-            body { padding: 1.5rem 1rem; }
-            .cv-wrapper { padding: 1.5rem; border-radius: 24px; }
-            .hero-section { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 1.5rem; }
-            .bento-card { grid-column: span 12; }
-            .span-6 { grid-column: span 12; }
-            .tag-group { justify-content: center; }
+        @media (max-width: 768px) {
+            body { padding: 1rem 0.5rem; }
+            .hero-banner { padding: 1.5rem; gap: 1.5rem; text-align: center; justify-content: center; }
+            .hero-details h1 { font-size: 1.8rem; }
+            .badge-carousel { justify-content: center; }
+            .meta-contact { grid-template-columns: 1fr; text-align: left; }
+            .sticky-navbar { flex-direction: column; top: 4px; padding: 0.5rem; }
+            .search-wrapper { width: 100%; }
+            .nav-scroll-container { width: 100%; justify-content: flex-start; }
         }
     </style>
 </head>
 <body>
 
-<div class="cv-wrapper">
-    <header class="hero-section">
-        <div class="avatar-container">
-            <div class="avatar-glow">HG</div>
+<div class="cv-container">
+
+    <header class="hero-banner">
+        <button class="theme-switcher" id="themeBtn" aria-label="Toggle Theme" title="Ubah Tema Tampilan">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="profile-wrapper">
+            <div class="avatar-box" id="avatarContainer">
+                <div class="img-placeholder">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <span>Pas Foto 3x4</span>
+            </div>
         </div>
-        <div class="profile-info">
-            <h1>Hendry Gunawan, S.HI., MH., M.Kom.</h1>
-            <div class="tag-group">
-                <span class="tag-pill"><i class="fas fa-chalkboard-user"></i> Dosen Multimedia</span>
-                <span class="tag-pill"><i class="fas fa-building"></i> UNSERA Banten</span>
-                <span class="tag-pill"><i class="fas fa-brain"></i> CEO sigmaBRAIN.ID</span>
+
+        <div class="hero-details">
+            <h1>HENDRY GUNAWAN, S.HI., MH., M.Kom.</h1>
+            <div class="badge-carousel">
+                <span class="badge-tag"><i class="fas fa-chalkboard-user"></i> Dosen Multimedia</span>
+                <span class="badge-tag"><i class="fas fa-laptop-code"></i> IT Consultant</span>
+                <span class="badge-tag"><i class="fas fa-shield-child"></i> Aktivis Anak</span>
             </div>
             
             <div class="meta-contact">
-                <div class="clickable-meta" onclick="copyValue('0412038603', 'NIDN berhasil disalin!')">
-                    <i class="fas fa-id-card"></i> <span>NIDN: 0412038603</span>
-                </div>
-                <div class="clickable-meta" onclick="copyValue('hendrygunawan@unsera.ac.id', 'Email berhasil disalin!')">
-                    <i class="fas fa-envelope"></i> <span>hendrygunawan@unsera.ac.id</span>
-                </div>
-                <div class="clickable-meta" onclick="copyValue('081927977810', 'Nomor telepon disalin!')">
-                    <i class="fas fa-phone-alt"></i> <span>081927977810</span>
-                </div>
-                <div class="clickable-meta" style="cursor: default;">
-                    <i class="fas fa-map-pin"></i> <span>Serang, Banten, ID</span>
-                </div>
+                <div class="meta-item"><i class="fas fa-id-badge"></i> <span><strong>NIDN:</strong> 0412038603</span></div>
+                <div class="meta-item"><i class="fas fa-phone"></i> <span>081927977810</span></div>
+                <div class="meta-item"><i class="fas fa-envelope"></i> <span>hendrygunawan@unsera.ac.id</span></div>
+                <div class="meta-item"><i class="fas fa-map-pin"></i> <span>Serang, Banten, Indonesia</span></div>
             </div>
         </div>
     </header>
 
-    <div class="grid-header">
-        <i class="fas fa-graduation-cap"></i> <span>Pendidikan · Academic Timeline</span>
-    </div>
+    <nav class="sticky-navbar">
+        <div class="nav-scroll-container">
+            <a href="#profil" class="nav-btn">👤 Profil</a>
+            <a href="#pendidikan" class="nav-btn">📚 Pendidikan</a>
+            <a href="#pengalaman" class="nav-btn">💼 Karir</a>
+            <a href="#organisasi" class="nav-btn">🤝 Organisasi</a>
+            <a href="#juri" class="nav-btn">⚖️ Juri</a>
+            <a href="#portfolio" class="nav-btn">🚀 Portofolio</a>
+            <a href="#training" class="nav-btn">🎓 Sertifikasi</a>
+        </div>
+        <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="dbSearch" class="search-input" placeholder="Cari keahlian/pengalaman...">
+        </div>
+    </nav>
+
     <main class="bento-grid">
-        <div class="bento-card">
-            <div class="card-subtext"><span>UIN "SMH" Banten</span> <span class="timeline-year">2021-2023</span></div>
-            <div class="card-heading">S2 Hukum Keluarga Islam</div>
+        
+        <div class="bento-sidebar" id="profil">
+            
+            <section class="bento-card">
+                <h3 class="card-header-title"><i class="fas fa-user-astronaut"></i> Profil Singkat</h3>
+                <p class="profile-bio">
+                    Dosen tetap, praktisi IT, dan konsultan dengan rekam jejak lebih dari 15 tahun di rumpun teknologi multimedia, sistem komputer, dan rekayasa perangkat lunak. Memiliki kapabilitas interdisipliner terintegrasi antara Ilmu Komputer (M.Kom) dan Ilmu Hukum (MH), serta mendedikasikan keahliannya sebagai pimpinan lembaga perlindungan anak tingkat regional.
+                </p>
+            </section>
+
+            <section class="bento-card">
+                <h3 class="card-header-title"><i class="fas fa-fingerprint"></i> Data Pribadi</h3>
+                <ul class="list-profile-data">
+                    <li><i class="fas fa-venus-mars"></i> <span>Laki-laki · Menikah</span></li>
+                    <li><i class="fas fa-kaaba"></i> <span>Islam</span></li>
+                    <li><i class="fas fa-building-columns"></i> <span>Homebase: Universitas Serang Raya (UNSERA)</span></li>
+                    <li><i class="fas fa-map-location-dot"></i> <span>Griya Ciracas Indah, Kel. Serang, Kec. Serang, Kota Serang - Banten</span></li>
+                </ul>
+            </section>
+
+            <section class="bento-card">
+                <h3 class="card-header-title"><i class="fas fa-briefcase-clock"></i> Fokus Peran Saat Ini</h3>
+                <ul class="list-profile-data">
+                    <li><i class="fas fa-university"></i> <span><strong>Dosen Multimedia</strong><br><small class="text-muted">Universitas Serang Raya (2012 - Sekarang)</small></span></li>
+                    <li><i class="fas fa-brain"></i> <span><strong>Direktur Eksekutif</strong><br><small class="text-muted">sigmaBRAIN.ID (2015 - Sekarang)</small></span></li>
+                    <li><i class="fas fa-gavel"></i> <span><strong>Sekretaris</strong><br><small class="text-muted">IDRI Provinsi Banten (2022 - 2027)</small></span></li>
+                    <li><i class="fas fa-child-reaching"></i> <span><strong>Ketua</strong><br><small class="text-muted">Komnas Perlindungan Anak Banten</small></span></li>
+                </ul>
+            </section>
         </div>
-        <div class="bento-card">
-            <div class="card-subtext"><span>STMIK Nusa Mandiri Jakarta</span> <span class="timeline-year">2012-2015</span></div>
-            <div class="card-heading">S2 Computer Science</div>
-        </div>
-        <div class="bento-card">
-            <div class="card-subtext"><span>IAIN "SMH" Banten</span> <span class="timeline-year">2005-2009</span></div>
-            <div class="card-heading">S1 Hukum Keluarga Islam</div>
+
+        <div class="bento-main">
+            
+            <section class="bento-card search-target" id="pendidikan">
+                <h3 class="card-header-title"><i class="fas fa-graduation-cap"></i> Riwayat Pendidikan</h3>
+                <div class="timeline-stream">
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">S2 Magister Ilmu Hukum (MH) - Hukum Keluarga</span><span class="node-time">2021–2023</span></div>
+                        <p class="node-desc">UIN Sultan Maulana Hasanuddin Banten</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">S2 Magister Ilmu Komputer (M.Kom) - Computer Science</span><span class="node-time">2012–2015</span></div>
+                        <p class="node-desc">STMIK Nusa Mandiri Jakarta</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">S1 Sarjana Hukum Islam (S.HI)</span><span class="node-time">2005–2009</span></div>
+                        <p class="node-desc">IAIN Sultan Maulana Hasanuddin Banten</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Pendidikan Pesantren Modern</span><span class="node-time">2001–2005</span></div>
+                        <p class="node-desc">MA Darussalam, Lampung</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bento-card search-target" id="pengalaman">
+                <h3 class="card-header-title"><i class="fas fa-history"></i> Rekam Jejak Profesional</h3>
+                <div class="timeline-stream">
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Dosen Tetap & Praktisi Multimedia</span><span class="node-time">2012 –skrg</span></div>
+                        <p class="node-desc">Universitas Serang Raya (UNSERA) – Banten</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Direktur Eksekutif</span><span class="node-time">2015 –skrg</span></div>
+                        <p class="node-desc">sigmaBRAIN.ID (Konsultan IT, Riset, & Edukasi Digital)</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Sekretaris Program Studi Sistem Komputer</span><span class="node-time">2023–2025</span></div>
+                        <p class="node-desc">Fakultas Teknologi Informasi - UNSERA</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">IT Consultant Komparatif Pemerintahan & Media</span><span class="node-time">2010–2021</span></div>
+                        <p class="node-desc">
+                            • KPU Kota Serang (2019-2021)<br>
+                            • KPU Kota Cilegon (2010-2018)<br>
+                            • Diskominfo Kota Serang (2016-2019)<br>
+                            • Radar Banten Online (2016-2020)
+                        </p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Kepala PUSDAINFO & Dosen Komputer</span><span class="node-time">2017–2023</span></div>
+                        <p class="node-desc">Pusat Data dan Informasi – Universitas Banten</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Kepala Program & Pendidik Multimedia</span><span class="node-time">2008–2016</span></div>
+                        <p class="node-desc">SMK Intan Husada Kota Serang (Inisiator Kurikulum Kejuruan TIK)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bento-card search-target" id="organisasi">
+                <h3 class="card-header-title"><i class="fas fa-users-gear"></i> Kepemimpinan & Organisasi</h3>
+                <div class="timeline-stream">
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Sekretaris Wilayah</span><span class="node-time">2022–2027</span></div>
+                        <p class="node-desc">Ikatan Dosen Republik Indonesia (IDRI) Provinsi Banten</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Ketua Tingkat Provinsi</span><span class="node-time">2021–2026</span></div>
+                        <p class="node-desc">Komisi Nasional Perlindungan Anak (Komnas PA) Provinsi Banten</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Sekretaris II</span><span class="node-time">2020–2025</span></div>
+                        <p class="node-desc">FK Kelompok Informasi Masyarakat (KIM) Provinsi Banten</p>
+                    </div>
+                    <div class="timeline-node">
+                        <div class="node-meta"><span class="node-title">Pimpinan Umum</span><span class="node-time">2008–2009</span></div>
+                        <p class="node-desc">Lembaga Pers Mahasiswa (LPM) SiGMA IAIN "SMH" Banten</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bento-card search-target" id="juri">
+                <h3 class="card-header-title"><i class="fas fa-gavel"></i> Eksperdisi: Juri & Fasilitasi</h3>
+                <ul class="modern-bullets">
+                    <li><strong>Dewan Juri</strong> Sayembara Desain Logo HUT Provinsi Banten ke-25 (2025) – Dinkominfo Banten</li>
+                    <li><strong>Dewan Juri Utama</strong> Web Technologies LKS Provinsi Banten (Edisi Tahunan 2018–2025) – Disdik Banten</li>
+                    <li><strong>Dewan Juri</strong> Sayembara Desain Logo Resmi HUT Kota Serang (2021) – Diskominfo Kota Serang</li>
+                    <li><strong>Fasilitator Nasional</strong> Penanganan Anak Berkebutuhan Khusus (ABK) (2018-2019) – KemenPPA / DP3AKKB</li>
+                </ul>
+            </section>
+
+            <section class="bento-card search-target" id="portfolio">
+                <h3 class="card-header-title"><i class="fas fa-cubes"></i> Portofolio Pengembangan Sistem</h3>
+                <div class="portfolio-box">
+                    <div class="portfolio-group">
+                        <h4>Aplikasi Android (Mobile Apps Native/Hybrid)</h4>
+                        <p class="node-desc">Aplikasi Pajak Air & PBBKB Bapenda Provinsi Banten (2019) · Aplikasi Edukasi Kamus Bahasa Jawa Banten · Kamus Budaya Digital Baduy (2020)</p>
+                    </div>
+                    <div class="portfolio-group">
+                        <h4>Sistem Informasi & Infrastruktur Web Government / Pendidikan</h4>
+                        <div class="portfolio-links">
+                            <a href="https://pajak-bantenprov.web.id/" target="_blank"><i class="fas fa-link"></i> Bapenda Pajak</a>
+                            <a href="https://kpu-serangkota.go.id/" target="_blank"><i class="fas fa-link"></i> KPU Kota Serang</a>
+                            <a href="https://idribanten.or.id/" target="_blank"><i class="fas fa-link"></i> IDRI Banten</a>
+                            <a href="https://stie-banten.ac.id/" target="_blank"><i class="fas fa-link"></i> STIE Banten</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bento-card search-target" id="training">
+                <h3 class="card-header-title"><i class="fas fa-certificate"></i> Pengembangan Diri & Sertifikasi</h3>
+                <ul class="modern-bullets">
+                    <li>Sertifikasi Kompetensi Pedagogik Dosen PEKERTI – Universitas Pendidikan Indonesia (2019)</li>
+                    <li>Bimtek Fasilitator Nasional Gugus Tugas KLA & PUHA – Kementerian PPA RI</li>
+                    <li>Sertifikasi Teknologis "Multimedia Advanced Lecture" – Unsera Joint Training di ITB (2014)</li>
+                    <li>Infrastruktur Jaringan & Routing Enterprise Mikrotik – Politeknik Piksi (2009)</li>
+                </ul>
+            </section>
+
         </div>
     </main>
 
-    <div class="grid-header">
-        <i class="fas fa-briefcase"></i> <span>Profesional Track · Real Experience</span>
-    </div>
-    <div class="bento-grid">
-        <div class="bento-card span-8">
-            <div class="card-subtext"><span>Universitas Serang Raya (UNSERA)</span> <span class="timeline-year">2012 - Sekarang</span></div>
-            <div class="card-heading">Dosen Tetap & Praktisi Multimedia</div>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Mengembangkan silabus interaktif, mengajar sistem multimedia, serta memimpin integrasi kurikulum berbasis komputasi modern.</p>
-        </div>
-        <div class="bento-card">
-            <div class="card-subtext"><span>sigmaBRAIN.ID</span> <span class="timeline-year">2015 - Now</span></div>
-            <div class="card-heading">Direktur Eksekutif</div>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">Technopreneur & IT Solution Deployment Core.</p>
-        </div>
-        <div class="bento-card">
-            <div class="card-subtext"><span>Pusdatin - Univ Banten</span> <span class="timeline-year">2018 - 2023</span></div>
-            <div class="card-heading">Kepala Pusdainfo</div>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">Arsitek tata kelola Pusat Data & Alur Informasi kampus.</p>
-        </div>
-        <div class="bento-card span-8">
-            <div class="card-subtext"><span>Strategic Consultation</span> <span class="timeline-year">2010 - 2021</span></div>
-            <div class="card-heading">IT Consultant Lembaga Strategis</div>
-            <div class="chip-container">
-                <span class="micro-chip">Radar Banten</span>
-                <span class="micro-chip">Diskominfo Serang</span>
-                <span class="micro-chip">KPU Serang & Cilegon</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-header">
-        <i class="fas fa-folder-tree"></i> <span>Ecosystem & Digital Artifacts</span>
-    </div>
-    <div class="bento-grid">
-        <div class="bento-card span-6">
-            <div class="card-heading" style="color: var(--accent-cyan);"><i class="fas fa-globe-asia"></i> Digital Projects Built</div>
-            <div style="margin-top: 1rem;">
-                <div class="project-link"><span>pajak-bantenprov.web.id</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-                <div class="project-link"><span>kpu-serangkota.go.id</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-                <div class="project-link"><span>idribanten.or.id</span><i class="fas fa-arrow-up-right-from-square"></i></div>
-                <span class="micro-chip" style="margin-top: 5px; display:inline-block;">+ Puluhan Aplikasi Android (Kamus Jawa Banten, Baduy)</span>
-            </div>
-        </div>
-
-        <div class="bento-card span-6">
-            <div class="card-heading" style="color: var(--accent-purple);"><i class="fas fa-users-gear"></i> Org Leadership</div>
-            <ul class="clean-list" style="margin-top: 0.5rem;">
-                <li class="list-row"><i class="fas fa-circle-check"></i> Ketua Komnas Perlindungan Anak Banten (2021-2026)</li>
-                <li class="list-row"><i class="fas fa-circle-check"></i> Sekretaris IDRI Prov. Banten (2022-2027)</li>
-                <li class="list-row"><i class="fas fa-circle-check"></i> Juri Web Technologies LKS Banten (2018-2025)</li>
-                <li class="list-row"><i class="fas fa-circle-check"></i> Juri Desain Logo HUT Prov. Banten 2025</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="interactive-pill-box" id="dynamicCoreCounter">
-        <p class="pulse-text" id="counterDisplay">🔁 20+ Tahun Pengalaman Interdisipliner</p>
-        <small class="glow-hint">✨ Klik untuk rotasi insight loop ✨</small>
-    </div>
-
     <footer>
-        <p>© 2026 Hendry Gunawan. All Rights Reserved.</p>
-        <p style="margin-top: 4px;">Engineered with Clean Glassmorphic Bento Architecture. Verified Stack: Vanilla HTML5, CSS3 Variables, ES6 JavaScript Core.</p>
+        <p>© <span id="currentYear"></span> · Hendry Gunawan, S.HI., MH., M.Kom. All Rights Reserved.</p>
+        <p style="font-size: 0.7rem; margin-top: 5px; color: var(--text-muted);">Engineered with Clean Vanilla JS & Bento CSS Framework. Optimized for GitHub Pages hosting deployment.</p>
     </footer>
+
 </div>
 
-<div id="toast">Value Copied!</div>
-
 <script>
-    // CORE SCRIPT 1: INTERACTIVE COPY TO CLIPBOARD SYSTEM
-    function copyValue(textToCopy, successMessage) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            const toast = document.getElementById("toast");
-            toast.innerText = successMessage;
-            toast.className = "show";
-            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
-        }).catch(err => {
-            console.error('Gagal menyalin text: ', err);
-        });
+    /**
+     * DOM Element Selection Global Variables
+     */
+    const themeBtn = document.getElementById('themeBtn');
+    const dbSearch = document.getElementById('dbSearch');
+    const rootTheme = document.documentElement;
+    const currentYearSpan = document.getElementById('currentYear');
+    const avatarContainer = document.getElementById('avatarContainer');
+
+    // Set Dynamic Year
+    currentYearSpan.textContent = new Date().getFullYear();
+
+    /**
+     * 1. THEME SWITCHER LOGIC (Dark/Light Persistence via LocalStorage)
+     */
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    rootTheme.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeBtn.addEventListener('click', () => {
+        const activeTheme = rootTheme.getAttribute('data-theme');
+        const nextTheme = activeTheme === 'light' ? 'dark' : 'light';
+        
+        rootTheme.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+        updateThemeIcon(nextTheme);
+    });
+
+    function updateThemeIcon(theme) {
+        const icon = themeBtn.querySelector('i');
+        if (theme === 'dark') {
+            icon.className = 'fas fa-sun';
+            themeBtn.style.background = 'rgba(255,255,255,0.9)';
+            themeBtn.style.color = '#000';
+        } else {
+            icon.className = 'fas fa-moon';
+            themeBtn.style.background = 'rgba(0,0,0,0.1)';
+            themeBtn.style.color = '#fff';
+        }
     }
 
-    // CORE SCRIPT 2: GEN Z RESONANCE LOOP INSIGHT SYSTEM
-    const corePill = document.getElementById("dynamicCoreCounter");
-    const textDisplay = document.getElementById("counterDisplay");
-    
-    if(corePill && textDisplay) {
-        let index = 0;
-        const metrics = [
-            "📚 Dosen UNSERA sejak 2009 + Senior IT Consultant.",
-            "⚖️ Dual-Track Core Specialist: Master Hukum & Master Komputer.",
-            "🛡️ Komisioner & Advokat Aktif Perlindungan Anak Provinsi Banten.",
-            "🏆 8 Tahun Beruntun Dipercaya Sebagai Juri Utama Web Technologies LKS."
-        ];
+    /**
+     * 2. REAL-TIME SEARCH FILTER ENGINE (Optimized DOM Traversal)
+     */
+    dbSearch.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase().trim();
+        const targets = document.querySelectorAll('.search-target');
 
-        corePill.addEventListener("click", () => {
-            // Apply scale effect on click
-            corePill.style.transform = "scale(0.98)";
-            setTimeout(() => corePill.style.transform = "scale(1)", 100);
+        targets.forEach(target => {
+            // Evaluasi seluruh textContent di dalam card target
+            const contentText = target.textContent.toLowerCase();
             
-            // Cycle texts
-            textDisplay.innerHTML = `🌀 <strong>${metrics[index]}</strong>`;
-            index = (index + 1) % metrics.length;
+            if (contentText.includes(keyword)) {
+                target.style.display = 'block';
+                // Animasi masuk halus
+                target.style.opacity = '1';
+                target.style.transform = 'scale(1)';
+            } else {
+                target.style.display = 'none';
+            }
         });
-    }
+    });
+
+    /**
+     * 3. AVATAR PRODUCTION INJECTION INSTRUCTION
+     * Ganti pas foto Anda: Taruh file 'foto.jpg' di root repository GitHub Anda.
+     * Uncomment baris kode di bawah ini jika foto.jpg sudah siap digunakan.
+     */
+    /*
+    const imgElement = document.createElement('img');
+    imgElement.src = 'foto.jpg';
+    imgElement.alt = 'Hendry Gunawan';
+    imgElement.style.width = '100%';
+    imgElement.style.height = '145px';
+    imgElement.style.objectFit = 'cover';
+    imgElement.style.borderRadius = '14px';
+    
+    const placeholder = document.querySelector('.img-placeholder');
+    placeholder.replaceWith(imgElement);
+    */
 </script>
 </body>
 </html>
