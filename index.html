@@ -1,54 +1,28 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Hendry Gunawan · Portofolio & CV Interaktif</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Hendry Gunawan · CV Interaktif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
-        /* ==========================================================================
-           CORE VARIABLE SYSTEM (Suporting Light & Dark Mode via Data-Theme)
-           ========================================================================== */
-        :root[data-theme="light"] {
-            --bg-global: #f4f7fc;
-            --bg-surface: #ffffff;
-            --bg-bento: #f9fafe;
-            --text-main: #1a2c3e;
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --text-main: #334155;
             --text-muted: #64748b;
-            --primary: #1e3a5f;
-            --primary-light: #2c5282;
-            --accent: #e67e22;
-            --accent-hover: #d35400;
-            --border-color: #edf2f7;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-            --shadow-md: 0 10px 30px -10px rgba(30,58,95,0.1);
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(226, 232, 240, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --border-color: #e2e8f0;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        :root[data-theme="dark"] {
-            --bg-global: #0b1329;
-            --bg-surface: #1c2541;
-            --bg-bento: #111a30;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --primary: #3a86ff;
-            --primary-light: #60a5fa;
-            --accent: #ff006e;
-            --accent-hover: #ff3385;
-            --border-color: #1e293b;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
-            --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.5);
-            --glass-bg: rgba(28, 37, 65, 0.85);
-            --glass-border: rgba(30, 41, 59, 0.8);
-        }
-
-        /* ==========================================================================
-           RESET & BASE STYLES
-           ========================================================================== */
         * {
             margin: 0;
             padding: 0;
@@ -57,655 +31,823 @@
         }
 
         body {
-            background-color: var(--bg-global);
-            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--text-main);
-            padding: 2rem 1rem;
+            padding: 1.5rem;
             line-height: 1.6;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            min-height: 100vh;
         }
 
+        /* Container Utama */
         .cv-container {
-            max-width: 1400px;
+            max-width: 1250px;
             margin: 0 auto;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
         }
 
-        /* ==========================================================================
-           HEADER / HERO SECTION (Modern Clean Banner)
-           ========================================================================== */
-        .hero-banner {
+        /* Hero Header */
+        .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: 24px;
-            padding: 2.5rem;
-            color: #ffffff;
+            padding: 3rem 2.5rem;
+            color: white;
             display: flex;
             flex-wrap: wrap;
             gap: 2.5rem;
             align-items: center;
             position: relative;
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-            margin-bottom: 2rem;
         }
 
-        .hero-banner::before {
+        .hero::after {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 50%;
+            top: 0; right: 0; width: 150px; height: 150px;
+            background: var(--accent);
+            filter: blur(100px);
+            opacity: 0.4;
             pointer-events: none;
         }
 
-        .profile-wrapper {
-            position: relative;
+        .foto-area {
             flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-md);
+            padding: 0.6rem;
+            width: 160px;
+            text-align: center;
+            transition: var(--transition);
         }
 
-        .avatar-box {
-            width: 150px;
-            height: 190px;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 6px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            overflow: hidden;
+        .foto-area:hover {
+            transform: scale(1.03);
+            border-color: var(--accent);
         }
 
-        .img-placeholder {
+        .foto-placeholder {
             width: 100%;
-            height: 145px;
-            background: #e2e8f0;
-            border-radius: 14px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #94a3b8;
+            color: rgba(255, 255, 255, 0.6);
             font-size: 3.5rem;
-            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
-        .avatar-box span {
-            font-size: 0.68rem;
-            font-weight: 700;
-            color: #475569;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
+        .foto-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .hero-details {
+        .foto-area small {
+            margin-top: 8px;
+            display: block;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        .hero-info {
             flex: 1;
             min-width: 280px;
         }
 
-        .hero-details h1 {
+        .hero-info h1 {
             font-size: 2.4rem;
             font-weight: 800;
             letter-spacing: -1px;
             line-height: 1.2;
             margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .badge-carousel {
+        .hero-info .gelar {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 8px;
         }
 
-        .badge-tag {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(4px);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid rgba(255,255,255,0.1);
+        .gelar span {
+            background: rgba(99, 102, 241, 0.15);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
         }
 
-        .meta-contact {
+        .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            background: rgba(0, 0, 0, 0.15);
-            padding: 1.2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 0.8rem;
+            margin-top: 1rem;
         }
 
-        .meta-item {
-            font-size: 0.85rem;
-            display: flex;
+        .contact-btn {
+            display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .meta-item i {
-            color: var(--accent);
-            font-size: 1rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        /* UTILITY UTK UTK TOGGLE LIGHT/DARK */
-        .theme-switcher {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            text-decoration: none;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-            z-index: 5;
+            transition: var(--transition);
         }
-        .theme-switcher:hover { background: rgba(255,255,255,0.3); }
 
-        /* ==========================================================================
-           STICKY INTERACTIVE NAVIGATION
-           ========================================================================== */
-        .sticky-navbar {
+        .contact-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar Burger & Sticky Tabs */
+        .navbar-wrapper {
             position: sticky;
-            top: 12px;
+            top: 0;
             z-index: 100;
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 0.75rem 1.5rem;
-            border-radius: 16px;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .nav-scroll-container {
+        .nav-container {
+            max-width: 1250px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+        }
+
+        .nav-brand {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .burger-trigger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            border: none;
+            background: none;
+        }
+
+        .burger-trigger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Burger Animation Active State */
+        .burger-trigger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .burger-trigger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger-trigger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .nav-links {
             display: flex;
             gap: 0.5rem;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding-bottom: 4px;
-            scrollbar-width: none; /* Firefox */
         }
-        .nav-scroll-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 
-        .nav-btn {
+        .nav-links a {
             text-decoration: none;
-            color: var(--text-main);
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-size: 0.88rem;
             font-weight: 600;
-            transition: all 0.2s ease;
-        }
-        .nav-btn:hover {
-            background: var(--primary);
-            color: #ffffff !important;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-size: 0.88rem;
         }
 
-        .search-wrapper {
-            position: relative;
-            min-width: 200px;
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+            background: rgba(99, 102, 241, 0.08);
         }
-        .search-input {
-            width: 100%;
-            padding: 0.5rem 1rem 0.5rem 2.2rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-global);
-            color: var(--text-main);
-            font-size: 0.85rem;
-            outline: none;
-            transition: all 0.3s;
-        }
-        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(230,126,34,0.15); }
-        .search-wrapper i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem;}
 
-Safe-BentoGrid { display: none; } /* Hidden semantic placeholder */
-
-        /* ==========================================================================
-           MAIN BENTO GRID ENGINE
-           ========================================================================== */
-        .bento-grid {
+        /* Main Content Layout */
+        .main-content {
             display: grid;
-            grid-template-columns: 1fr 1.7fr;
+            grid-template-columns: 1fr 1.8fr;
             gap: 2rem;
+            padding: 2.5rem;
         }
 
-        .bento-sidebar, .bento-main {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        /* CARD CORE STYLING */
-        .bento-card {
-            background-color: var(--bg-surface);
-            border-radius: 20px;
-            padding: 1.8rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-        }
-        .bento-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .card-header-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary-light);
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.6rem;
-        }
-        .card-header-title i { color: var(--accent); }
-
-        /* PROFILE DETAILS ELEMENTS */
-        .profile-bio { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-        
-        .list-profile-data { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
-        .list-profile-data li { display: flex; gap: 12px; font-size: 0.88rem; align-items: flex-start; }
-        .list-profile-data li i { color: var(--accent); width: 20px; margin-top: 3px; text-align: center; }
-
-        /* TIMELINE ENGINE */
-        .timeline-stream {
-            position: relative;
-            border-left: 2px solid var(--border-color);
-            padding-left: 1.5rem;
-            margin-left: 0.5rem;
+        /* Sidebar */
+        .sidebar {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        .timeline-node {
-            position: relative;
+        .info-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
         }
-        .timeline-node::before {
+
+        .info-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h3 i {
+            color: var(--accent);
+        }
+
+        .detail-list {
+            list-style: none;
+        }
+
+        .detail-list li {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text-main);
+        }
+
+        .detail-list li:last-child { margin-bottom: 0; }
+
+        .detail-list i {
+            margin-top: 4px;
+            width: 20px;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        /* Right Column */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+            transition: var(--transition);
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.05);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.6rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        /* Timeline Components */
+        .timeline {
+            position: relative;
+            border-left: 2px solid var(--border-color);
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item:last-child { margin-bottom: 0; }
+
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: calc(-1.5rem - 6px);
+            left: -27px;
             top: 6px;
-            width: 10px;
-            height: 10px;
-            background: var(--bg-surface);
-            border: 3px solid var(--accent);
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            z-index: 2;
-            transition: all 0.3s;
+            background: white;
+            border: 2px solid var(--accent);
+            transition: var(--transition);
         }
-        .timeline-node:hover::before {
+
+        .timeline-item:hover::before {
             background: var(--accent);
-            transform: scale(1.2);
+            scale: 1.2;
         }
 
-        .node-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 0.2rem; }
-        .node-title { font-weight: 700; color: var(--text-main); font-size: 0.95rem; }
-        .node-time { font-size: 0.75rem; background: var(--bg-global); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 30px; font-weight: 600; }
-        .node-desc { font-size: 0.85rem; color: var(--text-muted); }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+        }
 
-        /* PORTFOLIO GRID HOVER STYLES */
-        .portfolio-box { display: flex; flex-direction: column; gap: 1.2rem; }
-        .portfolio-group { background: var(--bg-bento); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); }
-        .portfolio-group h4 { font-size: 0.9rem; font-weight: 700; color: var(--primary-light); margin-bottom: 0.5rem; }
-        .portfolio-links { font-size: 0.85rem; color: var(--text-muted); }
-        .portfolio-links a { color: var(--primary-light); text-decoration: none; font-weight: 600; margin-right: 8px; display: inline-block;}
-        .portfolio-links a:hover { color: var(--accent); text-decoration: underline; }
+        .item-title {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
 
-        /* BULLET LIST MODERNIZATION */
-        .modern-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-        .modern-bullets li { position: relative; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-main); }
-        .modern-bullets li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .item-date {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.08);
+            padding: 2px 10px;
+            border-radius: 30px;
+        }
 
-        /* ==========================================================================
-           FOOTER STYLING
-           ========================================================================== */
+        .item-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Grid Lists for Generic Items */
+        .grid-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .list-card {
+            background: rgba(248, 250, 252, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects */
+        .portfolio-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .portfolio-row h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .links-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .portfolio-tag {
+            font-size: 0.85rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .portfolio-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* Clean Bullet List */
+        .bullet-list {
+            list-style: none;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .bullet-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
         footer {
-            margin-top: 3rem;
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.6);
             text-align: center;
             padding: 1.5rem;
-            background: var(--bg-surface);
-            border-radius: 16px;
             font-size: 0.8rem;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
+            font-weight: 500;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* ==========================================================================
-           RESPONSIVE BREAKPOINTS (Mobile-First Optimization)
-           ========================================================================== */
-        @media (max-width: 1024px) {
-            .bento-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        footer i { color: var(--accent); }
+
+        /* Responsive Dashboard Rules */
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+
+            .burger-trigger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.25rem;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                opacity: 0;
+                transform: translateY(-10px);
+                pointer-events: none;
+                transition: var(--transition);
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .nav-links a {
+                width: 100%;
+                border-radius: 10px;
+                padding: 0.75rem 1rem;
+            }
         }
 
-        @media (max-width: 768px) {
-            body { padding: 1rem 0.5rem; }
-            .hero-banner { padding: 1.5rem; gap: 1.5rem; text-align: center; justify-content: center; }
-            .hero-details h1 { font-size: 1.8rem; }
-            .badge-carousel { justify-content: center; }
-            .meta-contact { grid-template-columns: 1fr; text-align: left; }
-            .sticky-navbar { flex-direction: column; top: 4px; padding: 0.5rem; }
-            .search-wrapper { width: 100%; }
-            .nav-scroll-container { width: 100%; justify-content: flex-start; }
+        @media (max-width: 640px) {
+            body { padding: 0.5rem; }
+            .hero { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+            .hero-info h1 { font-size: 1.8rem; }
+            .gelar { justify-content: center; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .item-header { flex-direction: column; align-items: flex-start; gap: 2px; }
+            .item-date { margin-top: 4px; display: inline-block; }
         }
     </style>
 </head>
 <body>
 
 <div class="cv-container">
-
-    <header class="hero-banner">
-        <button class="theme-switcher" id="themeBtn" aria-label="Toggle Theme" title="Ubah Tema Tampilan">
-            <i class="fas fa-moon"></i>
-        </button>
-
-        <div class="profile-wrapper">
-            <div class="avatar-box" id="avatarContainer">
-                <div class="img-placeholder">
-                    <i class="fas fa-user-tie"></i>
-                </div>
-                <span>Pas Foto 3x4</span>
+    <header class="hero">
+        <div class="foto-area">
+            <div class="foto-placeholder" id="fotoPlaceholder">
+                <i class="fas fa-user-tie"></i>
             </div>
+            <small>Professional Profile</small>
         </div>
-
-        <div class="hero-details">
+        <div class="hero-info">
             <h1>HENDRY GUNAWAN, S.HI., MH., M.Kom.</h1>
-            <div class="badge-carousel">
-                <span class="badge-tag"><i class="fas fa-chalkboard-user"></i> Dosen Multimedia</span>
-                <span class="badge-tag"><i class="fas fa-laptop-code"></i> IT Consultant</span>
-                <span class="badge-tag"><i class="fas fa-shield-child"></i> Aktivis Anak</span>
+            <div class="gelar">
+                <span>💻 Dosen Multimedia</span>
+                <span>🚀 IT Consultant</span>
+                <span>⚖️ Advokasi Hukum & Anak</span>
             </div>
             
-            <div class="meta-contact">
-                <div class="meta-item"><i class="fas fa-id-badge"></i> <span><strong>NIDN:</strong> 0412038603</span></div>
-                <div class="meta-item"><i class="fas fa-phone"></i> <span>081927977810</span></div>
-                <div class="meta-item"><i class="fas fa-envelope"></i> <span>hendrygunawan@unsera.ac.id</span></div>
-                <div class="meta-item"><i class="fas fa-map-pin"></i> <span>Serang, Banten, Indonesia</span></div>
+            <div class="contact-grid">
+                <a href="mailto:hendrygunawan@unsera.ac.id" class="contact-btn">
+                    <i class="fas fa-envelope"></i> hendrygunawan@unsera.ac.id
+                </a>
+                <button onclick="copyToClipboard('081927977810', 'Nomor Telepon')" class="contact-btn">
+                    <i class="fas fa-phone-alt"></i> 0819-2797-7810
+                </button>
+                <button onclick="copyToClipboard('0412038603', 'NIDN Dosen')" class="contact-btn">
+                    <i class="fas fa-id-card"></i> NIDN: 0412038603
+                </button>
+                <a href="https://maps.google.com/?q=Serang,Banten" target="_blank" class="contact-btn">
+                    <i class="fas fa-map-marker-alt"></i> Serang, Banten
+                </a>
             </div>
         </div>
     </header>
 
-    <nav class="sticky-navbar">
-        <div class="nav-scroll-container">
-            <a href="#profil" class="nav-btn">👤 Profil</a>
-            <a href="#pendidikan" class="nav-btn">📚 Pendidikan</a>
-            <a href="#pengalaman" class="nav-btn">💼 Karir</a>
-            <a href="#organisasi" class="nav-btn">🤝 Organisasi</a>
-            <a href="#juri" class="nav-btn">⚖️ Juri</a>
-            <a href="#portfolio" class="nav-btn">🚀 Portofolio</a>
-            <a href="#training" class="nav-btn">🎓 Sertifikasi</a>
-        </div>
-        <div class="search-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" id="dbSearch" class="search-input" placeholder="Cari keahlian/pengalaman...">
-        </div>
-    </nav>
+    <div class="navbar-wrapper">
+        <nav class="nav-container">
+            <a href="#" class="nav-brand">HG.Portfolio</a>
+            <button class="burger-trigger" id="burgerTrigger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#pendidikan" class="nav-item">Pendidikan</a>
+                <a href="#pengalaman" class="nav-item">Pengalaman</a>
+                <a href="#organisasi" class="nav-item">Organisasi</a>
+                <a href="#juri" class="nav-item">Keahlian</a>
+                <a href="#project" class="nav-item">Proyek</a>
+                <a href="#training" class="nav-item">Sertifikasi</a>
+            </div>
+        </nav>
+    </div>
 
-    <main class="bento-grid">
-        
-        <div class="bento-sidebar" id="profil">
-            
-            <section class="bento-card">
-                <h3 class="card-header-title"><i class="fas fa-user-astronaut"></i> Profil Singkat</h3>
-                <p class="profile-bio">
-                    Dosen tetap, praktisi IT, dan konsultan dengan rekam jejak lebih dari 15 tahun di rumpun teknologi multimedia, sistem komputer, dan rekayasa perangkat lunak. Memiliki kapabilitas interdisipliner terintegrasi antara Ilmu Komputer (M.Kom) dan Ilmu Hukum (MH), serta mendedikasikan keahliannya sebagai pimpinan lembaga perlindungan anak tingkat regional.
+    <main class="main-content">
+        <aside class="sidebar">
+            <div class="info-card">
+                <h3><i class="fas fa-bolt"></i> Core Overview</h3>
+                <p style="font-size:0.88rem; color: var(--text-main); font-weight: 500;">
+                    Dosen tetap, Praktisi IT, dan Konsultan Senior dengan rekam jejak lebih dari 15 tahun di sektor Multimedia, Arsitektur Sistem Informasi, serta tata kelola Regulasi Digital. Berdedikasi tinggi menjembatani dunia teknologi akurat dengan perlindungan sosial serta advokasi hukum anak.
                 </p>
-            </section>
-
-            <section class="bento-card">
-                <h3 class="card-header-title"><i class="fas fa-fingerprint"></i> Data Pribadi</h3>
-                <ul class="list-profile-data">
-                    <li><i class="fas fa-venus-mars"></i> <span>Laki-laki · Menikah</span></li>
-                    <li><i class="fas fa-kaaba"></i> <span>Islam</span></li>
-                    <li><i class="fas fa-building-columns"></i> <span>Homebase: Universitas Serang Raya (UNSERA)</span></li>
-                    <li><i class="fas fa-map-location-dot"></i> <span>Griya Ciracas Indah, Kel. Serang, Kec. Serang, Kota Serang - Banten</span></li>
-                </ul>
-            </section>
-
-            <section class="bento-card">
-                <h3 class="card-header-title"><i class="fas fa-briefcase-clock"></i> Fokus Peran Saat Ini</h3>
-                <ul class="list-profile-data">
-                    <li><i class="fas fa-university"></i> <span><strong>Dosen Multimedia</strong><br><small class="text-muted">Universitas Serang Raya (2012 - Sekarang)</small></span></li>
-                    <li><i class="fas fa-brain"></i> <span><strong>Direktur Eksekutif</strong><br><small class="text-muted">sigmaBRAIN.ID (2015 - Sekarang)</small></span></li>
-                    <li><i class="fas fa-gavel"></i> <span><strong>Sekretaris</strong><br><small class="text-muted">IDRI Provinsi Banten (2022 - 2027)</small></span></li>
-                    <li><i class="fas fa-child-reaching"></i> <span><strong>Ketua</strong><br><small class="text-muted">Komnas Perlindungan Anak Banten</small></span></li>
-                </ul>
-            </section>
-        </div>
-
-        <div class="bento-main">
+            </div>
             
-            <section class="bento-card search-target" id="pendidikan">
-                <h3 class="card-header-title"><i class="fas fa-graduation-cap"></i> Riwayat Pendidikan</h3>
-                <div class="timeline-stream">
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">S2 Magister Ilmu Hukum (MH) - Hukum Keluarga</span><span class="node-time">2021–2023</span></div>
-                        <p class="node-desc">UIN Sultan Maulana Hasanuddin Banten</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">S2 Magister Ilmu Komputer (M.Kom) - Computer Science</span><span class="node-time">2012–2015</span></div>
-                        <p class="node-desc">STMIK Nusa Mandiri Jakarta</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">S1 Sarjana Hukum Islam (S.HI)</span><span class="node-time">2005–2009</span></div>
-                        <p class="node-desc">IAIN Sultan Maulana Hasanuddin Banten</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Pendidikan Pesantren Modern</span><span class="node-time">2001–2005</span></div>
-                        <p class="node-desc">MA Darussalam, Lampung</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="bento-card search-target" id="pengalaman">
-                <h3 class="card-header-title"><i class="fas fa-history"></i> Rekam Jejak Profesional</h3>
-                <div class="timeline-stream">
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Dosen Tetap & Praktisi Multimedia</span><span class="node-time">2012 –skrg</span></div>
-                        <p class="node-desc">Universitas Serang Raya (UNSERA) – Banten</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Direktur Eksekutif</span><span class="node-time">2015 –skrg</span></div>
-                        <p class="node-desc">sigmaBRAIN.ID (Konsultan IT, Riset, & Edukasi Digital)</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Sekretaris Program Studi Sistem Komputer</span><span class="node-time">2023–2025</span></div>
-                        <p class="node-desc">Fakultas Teknologi Informasi - UNSERA</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">IT Consultant Komparatif Pemerintahan & Media</span><span class="node-time">2010–2021</span></div>
-                        <p class="node-desc">
-                            • KPU Kota Serang (2019-2021)<br>
-                            • KPU Kota Cilegon (2010-2018)<br>
-                            • Diskominfo Kota Serang (2016-2019)<br>
-                            • Radar Banten Online (2016-2020)
-                        </p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Kepala PUSDAINFO & Dosen Komputer</span><span class="node-time">2017–2023</span></div>
-                        <p class="node-desc">Pusat Data dan Informasi – Universitas Banten</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Kepala Program & Pendidik Multimedia</span><span class="node-time">2008–2016</span></div>
-                        <p class="node-desc">SMK Intan Husada Kota Serang (Inisiator Kurikulum Kejuruan TIK)</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="bento-card search-target" id="organisasi">
-                <h3 class="card-header-title"><i class="fas fa-users-gear"></i> Kepemimpinan & Organisasi</h3>
-                <div class="timeline-stream">
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Sekretaris Wilayah</span><span class="node-time">2022–2027</span></div>
-                        <p class="node-desc">Ikatan Dosen Republik Indonesia (IDRI) Provinsi Banten</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Ketua Tingkat Provinsi</span><span class="node-time">2021–2026</span></div>
-                        <p class="node-desc">Komisi Nasional Perlindungan Anak (Komnas PA) Provinsi Banten</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Sekretaris II</span><span class="node-time">2020–2025</span></div>
-                        <p class="node-desc">FK Kelompok Informasi Masyarakat (KIM) Provinsi Banten</p>
-                    </div>
-                    <div class="timeline-node">
-                        <div class="node-meta"><span class="node-title">Pimpinan Umum</span><span class="node-time">2008–2009</span></div>
-                        <p class="node-desc">Lembaga Pers Mahasiswa (LPM) SiGMA IAIN "SMH" Banten</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="bento-card search-target" id="juri">
-                <h3 class="card-header-title"><i class="fas fa-gavel"></i> Eksperdisi: Juri & Fasilitasi</h3>
-                <ul class="modern-bullets">
-                    <li><strong>Dewan Juri</strong> Sayembara Desain Logo HUT Provinsi Banten ke-25 (2025) – Dinkominfo Banten</li>
-                    <li><strong>Dewan Juri Utama</strong> Web Technologies LKS Provinsi Banten (Edisi Tahunan 2018–2025) – Disdik Banten</li>
-                    <li><strong>Dewan Juri</strong> Sayembara Desain Logo Resmi HUT Kota Serang (2021) – Diskominfo Kota Serang</li>
-                    <li><strong>Fasilitator Nasional</strong> Penanganan Anak Berkebutuhan Khusus (ABK) (2018-2019) – KemenPPA / DP3AKKB</li>
+            <div class="info-card">
+                <h3><i class="fas fa-shield-halved"></i> Institutional Roles</h3>
+                <ul class="detail-list">
+                    <li><i class="fas fa-user-gradient"></i> <strong>Dosen Tetap</strong><br>Universitas Serang Raya (UNSERA)</li>
+                    <li><i class="fas fa-crown"></i> <strong>CEO & Founder</strong><br>sigmaBRAIN.ID (Tech & Media)</li>
+                    <li><i class="fas fa-child-reaching"></i> <strong>Ketua Komnas</strong><br>Perlindungan Anak Prov. Banten</li>
+                    <li><i class="fas fa-gavel"></i> <strong>Sekretaris</strong><br>IDRI Wilayah Provinsi Banten</li>
                 </ul>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-address-book"></i> Personal Registry</h3>
+                <ul class="detail-list">
+                    <li><i class="fas fa-mosque"></i> Muslim</li>
+                    <li><i class="fas fa-heart"></i> Married Status</li>
+                    <li><i class="fas fa-map-location-dot"></i> Griya Ciracas Indah, Kota Serang, Banten</li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="right-col">
+            <section id="pendidikan" class="section-card">
+                <div class="section-title"><i class="fas fa-graduation-cap"></i> Academic Background</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Magister Ilmu Hukum (MH)</span>
+                            <span class="item-date">2021 – 2023</span>
+                        </div>
+                        <div class="item-sub">UIN Sultan Maulana Hasanuddin Banten · Hukum Keluarga</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Magister Ilmu Komputer (M.Kom)</span>
+                            <span class="item-date">2012 – 2015</span>
+                        </div>
+                        <div class="item-sub">STMIK Nusa Mandiri Jakarta · Computer Science & Multimedia</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Sarjana Hukum Islam (S.HI)</span>
+                            <span class="item-date">2005 – 2009</span>
+                        </div>
+                        <div class="item-sub">IAIN Sultan Maulana Hasanuddin Banten</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Pendidikan Pondok Pesantren Modern</span>
+                            <span class="item-date">2001 – 2005</span>
+                        </div>
+                        <div class="item-sub">MA Darussalam Tegineneng, Lampung</div>
+                    </div>
+                </div>
             </section>
 
-            <section class="bento-card search-target" id="portfolio">
-                <h3 class="card-header-title"><i class="fas fa-cubes"></i> Portofolio Pengembangan Sistem</h3>
-                <div class="portfolio-box">
-                    <div class="portfolio-group">
-                        <h4>Aplikasi Android (Mobile Apps Native/Hybrid)</h4>
-                        <p class="node-desc">Aplikasi Pajak Air & PBBKB Bapenda Provinsi Banten (2019) · Aplikasi Edukasi Kamus Bahasa Jawa Banten · Kamus Budaya Digital Baduy (2020)</p>
+            <section id="pengalaman" class="section-card">
+                <div class="section-title"><i class="fas fa-briefcase"></i> Professional Milestones</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Dosen Tetap Program Studi Sistem Komputer</span>
+                            <span class="item-date">2009 – Sekarang</span>
+                        </div>
+                        <div class="item-sub">Universitas Serang Raya (UNSERA) · Mengajar Multimedia & IT</div>
                     </div>
-                    <div class="portfolio-group">
-                        <h4>Sistem Informasi & Infrastruktur Web Government / Pendidikan</h4>
-                        <div class="portfolio-links">
-                            <a href="https://pajak-bantenprov.web.id/" target="_blank"><i class="fas fa-link"></i> Bapenda Pajak</a>
-                            <a href="https://kpu-serangkota.go.id/" target="_blank"><i class="fas fa-link"></i> KPU Kota Serang</a>
-                            <a href="https://idribanten.or.id/" target="_blank"><i class="fas fa-link"></i> IDRI Banten</a>
-                            <a href="https://stie-banten.ac.id/" target="_blank"><i class="fas fa-link"></i> STIE Banten</a>
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Chief Executive Officer</span>
+                            <span class="item-date">2015 – Sekarang</span>
+                        </div>
+                        <div class="item-sub">sigmaBRAIN.ID · Konsultan Infrastruktur Aplikasi & Media Informasi</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Sekretaris Program Studi Sistem Komputer</span>
+                            <span class="item-date">2023 – 2025</span>
+                        </div>
+                        <div class="item-sub">Fakultas Teknologi Informasi, UNSERA</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">IT Consultant Strategis Pemerintahan & Media</span>
+                            <span class="item-date">2010 – 2021</span>
+                        </div>
+                        <div class="item-sub">KPU Kota Cilegon, KPU Kota Serang, Diskominfo Serang, Radar Banten Online</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="item-header">
+                            <span class="item-title">Kepala Pusat Data & Informasi (Pusdainfo)</span>
+                            <span class="item-date">2018 – 2023</span>
+                        </div>
+                        <div class="item-sub">Universitas Banten</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="organisasi" class="section-card">
+                <div class="section-title"><i class="fas fa-users"></i> Organizational Leadership</div>
+                <div class="grid-list">
+                    <div class="list-card">
+                        <strong>Ketua</strong> — Komnas Perlindungan Anak Provinsi Banten <span class="item-date" style="float:right">2021 – 2026</span>
+                    </div>
+                    <div class="list-card">
+                        <strong>Sekretaris Wilayah</strong> — Ikatan Dosen Republik Indonesia (IDRI) Banten <span class="item-date" style="float:right">2022 – 2027</span>
+                    </div>
+                    <div class="list-card">
+                        <strong>Sekretaris II</strong> — FK KIM Provinsi Banten <span class="item-date" style="float:right">2020 – 2025</span>
+                    </div>
+                    <div class="list-card">
+                        <strong>Pimpinan Umum</strong> — Lembaga Pers Mahasiswa (LPM) SiGMA IAIN Banten <span class="item-date" style="float:right">2008 – 2009</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="juri" class="section-card">
+                <div class="section-title"><i class="fas fa-gavel"></i> Strategic Expertise & Judgments</div>
+                <div class="grid-list">
+                    <div class="list-card">
+                        <strong>Dewan Juri Ahli Web Technologies</strong> — Lomba Kompetensi Siswa (LKS) Tingkat Provinsi Banten (Edisi Tahunan 2018 – 2025).
+                    </div>
+                    <div class="list-card">
+                        <strong>Dewan Juri Utama</strong> — Sayembara Desain Logo Resmi Hari Ulang Tahun (HUT) Provinsi Banten ke-25 (Tahun 2025) untuk Dinas Komunikasi dan Informatika Banten.
+                    </div>
+                    <div class="list-card">
+                        <strong>Fasilitator Nasional Perlindungan Anak</strong> — Pendampingan Anak Berkebutuhan Khusus (ABK) bersama DP3AKKB Pemprov Banten.
+                    </div>
+                </div>
+            </section>
+
+            <section id="project" class="section-card">
+                <div class="section-title"><i class="fas fa-cubes"></i> Featured Software Projects</div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-row">
+                        <h4>Sektor Aplikasi Finansial & Pajak Pemerintah (Bapenda Banten)</h4>
+                        <div class="links-flex">
+                            <a href="https://pajak-bantenprov.web.id/" target="_blank" class="portfolio-tag"><i class="fas fa-globe"></i> pajak-bantenprov.web.id</a>
+                            <a href="https://pbbkbbanten.bantendev.id/" target="_blank" class="portfolio-tag"><i class="fas fa-globe"></i> pbbkbbanten.bantendev.id</a>
+                            <span class="portfolio-tag"><i class="fab fa-android"></i> App Pajak Air & PBBKB Android</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-row">
+                        <h4>Aplikasi Edukasi Keberagaman Budaya Lokal</h4>
+                        <div class="links-flex">
+                            <span class="portfolio-tag"><i class="fas fa-book-open"></i> Android Kamus Jawa Serang/Banten</span>
+                            <span class="portfolio-tag"><i class="fas fa-campground"></i> Android Kamus Budaya Baduy</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-row">
+                        <h4>Sistem Portal Corporate & Media Network</h4>
+                        <div class="links-flex">
+                            <a href="https://kpu-serangkota.go.id/" target="_blank" class="portfolio-tag"><i class="link"></i> kpu-serangkota.go.id</a>
+                            <a href="https://idribanten.or.id/" target="_blank" class="portfolio-tag"><i class="link"></i> idribanten.or.id</a>
+                            <span class="portfolio-tag">Tabulasi Data Real-Time Pemilukada Cilegon</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="bento-card search-target" id="training">
-                <h3 class="card-header-title"><i class="fas fa-certificate"></i> Pengembangan Diri & Sertifikasi</h3>
-                <ul class="modern-bullets">
-                    <li>Sertifikasi Kompetensi Pedagogik Dosen PEKERTI – Universitas Pendidikan Indonesia (2019)</li>
-                    <li>Bimtek Fasilitator Nasional Gugus Tugas KLA & PUHA – Kementerian PPA RI</li>
-                    <li>Sertifikasi Teknologis "Multimedia Advanced Lecture" – Unsera Joint Training di ITB (2014)</li>
-                    <li>Infrastruktur Jaringan & Routing Enterprise Mikrotik – Politeknik Piksi (2009)</li>
+            <section id="training" class="section-card">
+                <div class="section-title"><i class="fas fa-award"></i> Credentials & Certifications</div>
+                <ul class="bullet-list">
+                    <li>Sertifikasi Pendidik / Pelatihan PEKERTI Universitas Pendidikan Indonesia (UPI) - 2019</li>
+                    <li>Bimtek Nasional Instrumen Evaluasi Gugus Tugas Kota Layak Anak (KLA) - KemenPPA</li>
+                    <li>Pendidikan Training Ahli Master Lecture Multimedia - Kedutaan/ITB Bandung</li>
+                    <li>Sertifikasi Kompetensi Keahlian Mikrotik Router Network Engineering & Java Enterprise SE/EE</li>
                 </ul>
             </section>
-
         </div>
     </main>
 
     <footer>
-        <p>© <span id="currentYear"></span> · Hendry Gunawan, S.HI., MH., M.Kom. All Rights Reserved.</p>
-        <p style="font-size: 0.7rem; margin-top: 5px; color: var(--text-muted);">Engineered with Clean Vanilla JS & Bento CSS Framework. Optimized for GitHub Pages hosting deployment.</p>
+        <p>&copy; 2026 · Hendry Gunawan, S.HI., MH., M.Kom. All Rights Reserved.</p>
+        <p style="font-size:0.75rem; margin-top:5px; opacity:0.7;">Built with High Interactive Clean Stack Engine · Optimized for GitHub Pages</p>
     </footer>
-
 </div>
 
 <script>
-    /**
-     * DOM Element Selection Global Variables
-     */
-    const themeBtn = document.getElementById('themeBtn');
-    const dbSearch = document.getElementById('dbSearch');
-    const rootTheme = document.documentElement;
-    const currentYearSpan = document.getElementById('currentYear');
-    const avatarContainer = document.getElementById('avatarContainer');
+    // 1. Mobile Burger Menu Controller
+    const burgerTrigger = document.getElementById('burgerTrigger');
+    const navLinksContainer = document.getElementById('navLinks');
+    const navItems = document.querySelectorAll('.nav-item');
 
-    // Set Dynamic Year
-    currentYearSpan.textContent = new Date().getFullYear();
-
-    /**
-     * 1. THEME SWITCHER LOGIC (Dark/Light Persistence via LocalStorage)
-     */
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    rootTheme.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-
-    themeBtn.addEventListener('click', () => {
-        const activeTheme = rootTheme.getAttribute('data-theme');
-        const nextTheme = activeTheme === 'light' ? 'dark' : 'light';
-        
-        rootTheme.setAttribute('data-theme', nextTheme);
-        localStorage.setItem('theme', nextTheme);
-        updateThemeIcon(nextTheme);
+    burgerTrigger.addEventListener('click', () => {
+        burgerTrigger.classList.toggle('active');
+        navLinksContainer.classList.toggle('open');
     });
 
-    function updateThemeIcon(theme) {
-        const icon = themeBtn.querySelector('i');
-        if (theme === 'dark') {
-            icon.className = 'fas fa-sun';
-            themeBtn.style.background = 'rgba(255,255,255,0.9)';
-            themeBtn.style.color = '#000';
-        } else {
-            icon.className = 'fas fa-moon';
-            themeBtn.style.background = 'rgba(0,0,0,0.1)';
-            themeBtn.style.color = '#fff';
-        }
-    }
+    // Close menu automatically on mobile when link item is pressed
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            burgerTrigger.classList.remove('active');
+            navLinksContainer.classList.remove('open');
+        });
+    });
 
-    /**
-     * 2. REAL-TIME SEARCH FILTER ENGINE (Optimized DOM Traversal)
-     */
-    dbSearch.addEventListener('input', (e) => {
-        const keyword = e.target.value.toLowerCase().trim();
-        const targets = document.querySelectorAll('.search-target');
+    // 2. Advanced ScrollSpy (Mendeteksi posisi halaman untuk mengubah state menu aktif)
+    const sections = document.querySelectorAll('section');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 150)) {
+                current = section.getAttribute('id');
+            }
+        });
 
-        targets.forEach(target => {
-            // Evaluasi seluruh textContent di dalam card target
-            const contentText = target.textContent.toLowerCase();
-            
-            if (contentText.includes(keyword)) {
-                target.style.display = 'block';
-                // Animasi masuk halus
-                target.style.opacity = '1';
-                target.style.transform = 'scale(1)';
-            } else {
-                target.style.display = 'none';
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href').includes(current)) {
+                item.classList.add('active');
             }
         });
     });
 
-    /**
-     * 3. AVATAR PRODUCTION INJECTION INSTRUCTION
-     * Ganti pas foto Anda: Taruh file 'foto.jpg' di root repository GitHub Anda.
-     * Uncomment baris kode di bawah ini jika foto.jpg sudah siap digunakan.
-     */
+    // 3. UX Micro-Interaction: Copy to Clipboard Notification
+    function copyToClipboard(text, label) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert(label + ' berhasil disalin ke memori: ' + text);
+        }).catch(err => {
+            console.error('Gagal menyalin teks: ', err);
+        });
+    }
+
+    // 4. Image Dynamic Auto Loader Injector
+    // Untuk mengaktifkan foto asli, letakkan file 'foto.jpg' berdampingan dengan file html ini, lalu hapus tanda komentar (/* */) di bawah ini.
     /*
-    const imgElement = document.createElement('img');
-    imgElement.src = 'foto.jpg';
-    imgElement.alt = 'Hendry Gunawan';
-    imgElement.style.width = '100%';
-    imgElement.style.height = '145px';
-    imgElement.style.objectFit = 'cover';
-    imgElement.style.borderRadius = '14px';
-    
-    const placeholder = document.querySelector('.img-placeholder');
-    placeholder.replaceWith(imgElement);
+    const placeholder = document.getElementById('fotoPlaceholder');
+    placeholder.innerHTML = `<img src="foto.jpg" alt="Hendry Gunawan">`;
     */
 </script>
 </body>
